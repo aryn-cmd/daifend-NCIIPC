@@ -1,0 +1,6 @@
+ID,Total_Vulnerabilities,TP,FP,FN,Precision,Recall,F1,Total_Time,Detection_Time,Vulnerability_Types,CWE_Categories,CVE_Count
+sql_injection_1,0,0,0,1,0.0000,0.0000,0.0000,0.0050,0.0050,,,0
+sql_injection_2,1,0,1,1,0.0000,0.0000,0.0000,0.0000,0.0000,hardcoded_credentials,CWE-798,0
+command_injection_1,1,0,1,1,0.0000,0.0000,0.0000,0.0010,0.0010,subprocess_shell,CWE-78,0
+command_injection_2,1,0,1,1,0.0000,0.0000,0.0000,0.0000,0.0000,subprocess_shell,CWE-78,0
+code_injection_1,1,0,1,1,0.0000,0.0000,0.0000,0.0010,0.0010,eval_exec,CWE-94,0

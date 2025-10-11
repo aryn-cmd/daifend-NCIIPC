@@ -1,0 +1,14 @@
+# Python Vulnerability Detection Engine Requirements
+
+# Core dependencies
+requests>=2.28.0
+pathlib2>=2.3.7
+
+# Optional dependencies for enhanced functionality
+# (These are already included in the main requirements.txt)
+# - ast (built-in)
+# - re (built-in) 
+# - json (built-in)
+# - time (built-in)
+# - csv (built-in)
+# - argparse (built-in)
