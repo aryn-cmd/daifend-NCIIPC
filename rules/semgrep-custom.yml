@@ -1,0 +1,351 @@
+# NCIIPC Custom Semgrep Rules for OWASP Top 10 and CWE-Top 25
+# Focused on high-confidence vulnerability patterns
+
+rules:
+  # A1:2017 - Injection
+  - id: sql-injection-direct
+    patterns:
+      - pattern-either:
+          - pattern: |
+              $DB.query($QUERY)
+          - pattern: |
+              $DB.execute($QUERY)
+          - pattern: |
+              $DB.prepare($QUERY)
+          - pattern: |
+              mysqli_query($..., $QUERY)
+          - pattern: |
+              mysql_query($QUERY)
+          - pattern: |
+              $CONN.execute($QUERY)
+          - pattern: |
+              $SESSION.execute($QUERY)
+    message: Potential SQL Injection vulnerability. Use parameterized queries.
+    languages: [python, php, java, csharp, javascript]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-89"
+      owasp: "A1:2017"
+      confidence: HIGH
+
+  - id: command-injection
+    patterns:
+      - pattern-either:
+          - pattern: |
+              os.system($CMD)
+          - pattern: |
+              subprocess.call($CMD, shell=True)
+          - pattern: |
+              exec($CMD)
+          - pattern: |
+              eval($CMD)
+          - pattern: |
+              shell_exec($CMD)
+          - pattern: |
+              system($CMD)
+          - pattern: |
+              passthru($CMD)
+    message: Potential command injection vulnerability. Avoid shell execution with user input.
+    languages: [python, php, javascript]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-78"
+      owasp: "A1:2017"
+      confidence: HIGH
+
+  # A2:2017 - Broken Authentication
+  - id: hardcoded-password
+    patterns:
+      - pattern-either:
+          - pattern: |
+              password = "..."
+          - pattern: |
+              $PASS = "..."
+          - pattern: |
+              $PASSWORD = "..."
+          - pattern: |
+              passwd = "..."
+          - pattern: |
+              pwd = "..."
+          - pattern-regex: |
+              (?:password|passwd|pwd)\s*=\s*["'][^"']{4,}["']
+    message: Hardcoded password detected. Use secure credential management.
+    languages: [python, java, csharp, php, javascript]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-259"
+      owasp: "A2:2017"
+      confidence: HIGH
+
+  - id: weak-hashing
+    patterns:
+      - pattern-either:
+          - pattern: |
+              hashlib.md5($DATA)
+          - pattern: |
+              hashlib.sha1($DATA)
+          - pattern: |
+              md5($DATA)
+          - pattern: |
+              sha1($DATA)
+          - pattern: |
+              MessageDigest.getInstance("MD5")
+          - pattern: |
+              MessageDigest.getInstance("SHA1")
+    message: Weak hashing algorithm detected. Use SHA-256 or stronger.
+    languages: [python, java, php, csharp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-327"
+      owasp: "A2:2017"
+      confidence: HIGH
+
+  # A3:2017 - Sensitive Data Exposure
+  - id: insecure-transport
+    patterns:
+      - pattern-either:
+          - pattern: |
+              http://$URL
+          - pattern: |
+              ftp://$URL
+          - pattern: |
+              telnet://$URL
+    message: Insecure protocol detected. Use HTTPS/TLS for sensitive data.
+    languages: [python, java, csharp, php, javascript]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-319"
+      owasp: "A3:2017"
+      confidence: HIGH
+
+  # A4:2017 - XML External Entities (XXE)
+  - id: xxe-vulnerability
+    patterns:
+      - pattern-either:
+          - pattern: |
+              xml.etree.ElementTree.parse($FILE)
+          - pattern: |
+              xml.dom.minidom.parse($FILE)
+          - pattern: |
+              lxml.etree.parse($FILE)
+          - pattern: |
+              DocumentBuilder.parse($FILE)
+          - pattern: |
+              SAXParser.parse($FILE)
+    message: Potential XXE vulnerability. Disable external entity processing.
+    languages: [python, java, csharp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-611"
+      owasp: "A4:2017"
+      confidence: MEDIUM
+
+  # A5:2017 - Broken Access Control
+  - id: missing-authentication
+    patterns:
+      - pattern-either:
+          - pattern: |
+              @RequestMapping(...)
+              public $TYPE $METHOD(...)
+          - pattern: |
+              @GetMapping(...)
+              public $TYPE $METHOD(...)
+          - pattern: |
+              @PostMapping(...)
+              public $TYPE $METHOD(...)
+    message: API endpoint without authentication. Add security annotations.
+    languages: [java]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-862"
+      owasp: "A5:2017"
+      confidence: MEDIUM
+
+  # A6:2017 - Security Misconfiguration
+  - id: debug-mode-enabled
+    patterns:
+      - pattern-either:
+          - pattern: |
+              DEBUG = True
+          - pattern: |
+              debug = true
+          - pattern: |
+              $DEBUG = true
+          - pattern: |
+              app.debug = true
+    message: Debug mode enabled in production. Disable debug mode.
+    languages: [python, php, javascript]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-489"
+      owasp: "A6:2017"
+      confidence: HIGH
+
+  - id: insecure-cors
+    patterns:
+      - pattern-either:
+          - pattern: |
+              cors.allow_origins = ["*"]
+          - pattern: |
+              Access-Control-Allow-Origin: *
+          - pattern: |
+              CORS_ALLOW_ALL_ORIGINS = True
+    message: Overly permissive CORS configuration. Restrict origins.
+    languages: [python, javascript, php]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-942"
+      owasp: "A6:2017"
+      confidence: MEDIUM
+
+  # A7:2017 - Cross-Site Scripting (XSS)
+  - id: xss-reflected
+    patterns:
+      - pattern-either:
+          - pattern: |
+              return render_template("$TEMPLATE", $VAR=$USER_INPUT)
+          - pattern: |
+              return $USER_INPUT
+          - pattern: |
+              document.write($USER_INPUT)
+          - pattern: |
+              innerHTML = $USER_INPUT
+    message: Potential XSS vulnerability. Sanitize user input before output.
+    languages: [python, javascript, php, java]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-79"
+      owasp: "A7:2017"
+      confidence: MEDIUM
+
+  # A8:2017 - Insecure Deserialization
+  - id: insecure-deserialization
+    patterns:
+      - pattern-either:
+          - pattern: |
+              pickle.loads($DATA)
+          - pattern: |
+              pickle.load($FILE)
+          - pattern: |
+              yaml.load($DATA)
+          - pattern: |
+              ObjectInputStream.readObject()
+          - pattern: |
+              BinaryFormatter.Deserialize()
+    message: Insecure deserialization detected. Use safe deserialization methods.
+    languages: [python, java, csharp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-502"
+      owasp: "A8:2017"
+      confidence: HIGH
+
+  # A9:2017 - Using Components with Known Vulnerabilities
+  - id: outdated-dependencies
+    patterns:
+      - pattern-either:
+          - pattern: |
+              <version>$OLD_VERSION</version>
+          - pattern: |
+              version = "$OLD_VERSION"
+          - pattern: |
+              "$PACKAGE": "$OLD_VERSION"
+    message: Potentially outdated dependency. Update to latest secure version.
+    languages: [java, javascript, python, php]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-1104"
+      owasp: "A9:2017"
+      confidence: LOW
+
+  # A10:2017 - Insufficient Logging & Monitoring
+  - id: missing-security-logging
+    patterns:
+      - pattern-either:
+          - pattern: |
+              try:
+                  $CODE
+              except $EXCEPTION:
+                  pass
+          - pattern: |
+              catch ($EXCEPTION) {
+                  // empty
+              }
+    message: Exception handling without logging. Add security event logging.
+    languages: [python, java, csharp, php, javascript]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-778"
+      owasp: "A10:2017"
+      confidence: MEDIUM
+
+  # CWE-Top 25 Additional Rules
+  - id: buffer-overflow
+    patterns:
+      - pattern-either:
+          - pattern: |
+              strcpy($DEST, $SRC)
+          - pattern: |
+              strcat($DEST, $SRC)
+          - pattern: |
+              sprintf($BUF, $FMT, ...)
+          - pattern: |
+              gets($BUF)
+    message: Potential buffer overflow vulnerability. Use safe string functions.
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-120"
+      confidence: HIGH
+
+  - id: null-pointer-dereference
+    patterns:
+      - pattern-either:
+          - pattern: |
+              $OBJ->$METHOD(...)
+          - pattern: |
+              $OBJ.$METHOD(...)
+          - pattern: |
+              $OBJ[$INDEX]
+    message: Potential null pointer dereference. Add null checks.
+    languages: [c, cpp, java, csharp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-476"
+      confidence: MEDIUM
+
+  - id: path-traversal
+    patterns:
+      - pattern-either:
+          - pattern: |
+              open($PATH, ...)
+          - pattern: |
+              file_get_contents($PATH)
+          - pattern: |
+              new File($PATH)
+          - pattern: |
+              File.ReadAllText($PATH)
+    message: Potential path traversal vulnerability. Validate file paths.
+    languages: [python, php, java, csharp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-22"
+      confidence: MEDIUM
+
+  - id: race-condition
+    patterns:
+      - pattern-either:
+          - pattern: |
+              if (file_exists($FILE)) {
+                  unlink($FILE);
+              }
+          - pattern: |
+              if (access($FILE, W_OK) == 0) {
+                  unlink($FILE);
+              }
+    message: Potential race condition. Use atomic operations.
+    languages: [c, cpp, python, php]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-362"
+      confidence: MEDIUM

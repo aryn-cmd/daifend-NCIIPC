@@ -1,0 +1,14 @@
+# PHPStan Configuration for NCIIPC Security Analysis
+parameters:
+    level: max
+    paths:
+        - /app/source-code
+    excludePaths:
+        - vendor
+        - node_modules
+        - .git
+    ignoreErrors:
+        - '#Call to an undefined method#'
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false

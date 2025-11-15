@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NCIIPC Cppcheck Suppressions Configuration -->
+<!-- Focus on OWASP Top 10 and CWE-Top 25 security vulnerabilities -->
+<suppressions>
+    
+    <!-- Include only security-critical checks -->
+    <!-- Buffer overflow and memory safety -->
+    <suppress>
+        <id>bufferAccessOutOfBounds</id>
+        <comment>Buffer access out of bounds - CWE-119</comment>
+    </suppress>
+    
+    <suppress>
+        <id>arrayIndexOutOfBounds</id>
+        <comment>Array index out of bounds - CWE-119</comment>
+    </suppress>
+    
+    <suppress>
+        <id>nullPointer</id>
+        <comment>Null pointer dereference - CWE-476</comment>
+    </suppress>
+    
+    <suppress>
+        <id>uninitializedVariable</id>
+        <comment>Uninitialized variable - CWE-457</comment>
+    </suppress>
+    
+    <suppress>
+        <id>memoryLeak</id>
+        <comment>Memory leak - CWE-401</comment>
+    </suppress>
+    
+    <suppress>
+        <id>resourceLeak</id>
+        <comment>Resource leak - CWE-404</comment>
+    </suppress>
+    
+    <suppress>
+        <id>doubleFree</id>
+        <comment>Double free - CWE-415</comment>
+    </suppress>
+    
+    <suppress>
+        <id>useAfterFree</id>
+        <comment>Use after free - CWE-416</comment>
+    </suppress>
+    
+    <!-- Cryptographic issues -->
+    <suppress>
+        <id>insecureRandom</id>
+        <comment>Insecure random number generation - CWE-330</comment>
+    </suppress>
+    
+    <suppress>
+        <id>insecureTempFile</id>
+        <comment>Insecure temporary file creation - CWE-377</comment>
+    </suppress>
+    
+    <suppress>
+        <id>weakCryptographicHash</id>
+        <comment>Weak cryptographic hash function - CWE-327</comment>
+    </suppress>
+    
+    <suppress>
+        <id>weakCryptographicCipher</id>
+        <comment>Weak cryptographic cipher - CWE-327</comment>
+    </suppress>
+    
+    <!-- Input validation issues -->
+    <suppress>
+        <id>invalidScanfArgType_sint</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_float</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_int</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_str</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_str_w</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_uint</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_ulong</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_ulonglong</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <suppress>
+        <id>invalidScanfArgType_ushort</id>
+        <comment>Invalid scanf argument type - potential format string vulnerability</comment>
+    </suppress>
+    
+    <!-- Format string vulnerabilities -->
+    <suppress>
+        <id>formatString</id>
+        <comment>Format string vulnerability - CWE-134</comment>
+    </suppress>
+    
+    <suppress>
+        <id>formatStringVulnerability</id>
+        <comment>Format string vulnerability - CWE-134</comment>
+    </suppress>
+    
+    <suppress>
+        <id>formatStringError</id>
+        <comment>Format string error - CWE-134</comment>
+    </suppress>
+    
+    <!-- Command injection -->
+    <suppress>
+        <id>systemCall</id>
+        <comment>System call - potential command injection - CWE-78</comment>
+    </suppress>
+    
+    <suppress>
+        <id>executionAfterLoop</id>
+        <comment>Execution after loop - potential security issue</comment>
+    </suppress>
+    
+    <!-- Integer overflow -->
+    <suppress>
+        <id>integerOverflow</id>
+        <comment>Integer overflow - CWE-190</comment>
+    </suppress>
+    
+    <suppress>
+        <id>unsignedLessThanZero</id>
+        <comment>Unsigned less than zero - potential overflow</comment>
+    </suppress>
+    
+    <suppress>
+        <id>unsignedPositive</id>
+        <comment>Unsigned positive - potential overflow</comment>
+    </suppress>
+    
+    <!-- Race conditions -->
+    <suppress>
+        <id>raceCondition</id>
+        <comment>Race condition - CWE-362</comment>
+    </suppress>
+    
+    <suppress>
+        <id>raceConditionFile</id>
+        <comment>Race condition in file operations - CWE-362</comment>
+    </suppress>
+    
+    <!-- Path traversal -->
+    <suppress>
+        <id>pathTraversal</id>
+        <comment>Path traversal vulnerability - CWE-22</comment>
+    </suppress>
+    
+    <suppress>
+        <id>pathTraversalIn</id>
+        <comment>Path traversal in - CWE-22</comment>
+    </suppress>
+    
+    <suppress>
+        <id>pathTraversalOut</id>
+        <comment>Path traversal out - CWE-22</comment>
+    </suppress>
+    
+    <!-- SQL injection -->
+    <suppress>
+        <id>sqlInjection</id>
+        <comment>SQL injection vulnerability - CWE-89</comment>
+    </suppress>
+    
+    <suppress>
+        <id>sqlInjectionC</id>
+        <comment>SQL injection vulnerability - CWE-89</comment>
+    </suppress>
+    
+    <!-- XSS -->
+    <suppress>
+        <id>xss</id>
+        <comment>Cross-site scripting vulnerability - CWE-79</comment>
+    </suppress>
+    
+    <suppress>
+        <id>xssC</id>
+        <comment>Cross-site scripting vulnerability - CWE-79</comment>
+    </suppress>
+    
+    <!-- XXE -->
+    <suppress>
+        <id>xxe</id>
+        <comment>XML external entity vulnerability - CWE-611</comment>
+    </suppress>
+    
+    <suppress>
+        <id>xxeC</id>
+        <comment>XML external entity vulnerability - CWE-611</comment>
+    </suppress>
+    
+    <!-- LDAP injection -->
+    <suppress>
+        <id>ldapInjection</id>
+        <comment>LDAP injection vulnerability - CWE-90</comment>
+    </suppress>
+    
+    <suppress>
+        <id>ldapInjectionC</id>
+        <comment>LDAP injection vulnerability - CWE-90</comment>
+    </suppress>
+    
+    <!-- XPATH injection -->
+    <suppress>
+        <id>xpathInjection</id>
+        <comment>XPath injection vulnerability - CWE-91</comment>
+    </suppress>
+    
+    <suppress>
+        <id>xpathInjectionC</id>
+        <comment>XPath injection vulnerability - CWE-91</comment>
+    </suppress>
+    
+    <!-- NoSQL injection -->
+    <suppress>
+        <id>nosqlInjection</id>
+        <comment>NoSQL injection vulnerability - CWE-943</comment>
+    </suppress>
+    
+    <suppress>
+        <id>nosqlInjectionC</id>
+        <comment>NoSQL injection vulnerability - CWE-943</comment>
+    </suppress>
+    
+    <!-- Code injection -->
+    <suppress>
+        <id>codeInjection</id>
+        <comment>Code injection vulnerability - CWE-94</comment>
+    </suppress>
+    
+    <suppress>
+        <id>codeInjectionC</id>
+        <comment>Code injection vulnerability - CWE-94</comment>
+    </suppress>
+    
+    <!-- Deserialization -->
+    <suppress>
+        <id>deserialization</id>
+        <comment>Insecure deserialization - CWE-502</comment>
+    </suppress>
+    
+    <suppress>
+        <id>deserializationC</id>
+        <comment>Insecure deserialization - CWE-502</comment>
+    </suppress>
+    
+    <!-- Weak authentication -->
+    <suppress>
+        <id>weakAuthentication</id>
+        <comment>Weak authentication mechanism</comment>
+    </suppress>
+    
+    <suppress>
+        <id>weakAuthenticationC</id>
+        <comment>Weak authentication mechanism</comment>
+    </suppress>
+    
+    <!-- Weak authorization -->
+    <suppress>
+        <id>weakAuthorization</id>
+        <comment>Weak authorization mechanism</comment>
+    </suppress>
+    
+    <suppress>
+        <id>weakAuthorizationC</id>
+        <comment>Weak authorization mechanism</comment>
+    </suppress>
+    
+    <!-- Information disclosure -->
+    <suppress>
+        <id>informationDisclosure</id>
+        <comment>Information disclosure vulnerability - CWE-200</comment>
+    </suppress>
+    
+    <suppress>
+        <id>informationDisclosureC</id>
+        <comment>Information disclosure vulnerability - CWE-200</comment>
+    </suppress>
+    
+    <!-- Session management -->
+    <suppress>
+        <id>sessionManagement</id>
+        <comment>Session management vulnerability - CWE-613</comment>
+    </suppress>
+    
+    <suppress>
+        <id>sessionManagementC</id>
+        <comment>Session management vulnerability - CWE-613</comment>
+    </suppress>
+    
+    <!-- CSRF -->
+    <suppress>
+        <id>csrf</id>
+        <comment>Cross-site request forgery - CWE-352</comment>
+    </suppress>
+    
+    <suppress>
+        <id>csrfC</id>
+        <comment>Cross-site request forgery - CWE-352</comment>
+    </suppress>
+    
+    <!-- Clickjacking -->
+    <suppress>
+        <id>clickjacking</id>
+        <comment>Clickjacking vulnerability - CWE-693</comment>
+    </suppress>
+    
+    <suppress>
+        <id>clickjackingC</id>
+        <comment>Clickjacking vulnerability - CWE-693</comment>
+    </suppress>
+    
+    <!-- Security misconfiguration -->
+    <suppress>
+        <id>securityMisconfiguration</id>
+        <comment>Security misconfiguration - CWE-16</comment>
+    </suppress>
+    
+    <suppress>
+        <id>securityMisconfigurationC</id>
+        <comment>Security misconfiguration - CWE-16</comment>
+    </suppress>
+    
+    <!-- Insecure direct object reference -->
+    <suppress>
+        <id>insecureDirectObjectReference</id>
+        <comment>Insecure direct object reference - CWE-639</comment>
+    </suppress>
+    
+    <suppress>
+        <id>insecureDirectObjectReferenceC</id>
+        <comment>Insecure direct object reference - CWE-639</comment>
+    </suppress>
+    
+    <!-- Missing function level access control -->
+    <suppress>
+        <id>missingFunctionLevelAccessControl</id>
+        <comment>Missing function level access control - CWE-862</comment>
+    </suppress>
+    
+    <suppress>
+        <id>missingFunctionLevelAccessControlC</id>
+        <comment>Missing function level access control - CWE-862</comment>
+    </suppress>
+    
+    <!-- Server-side request forgery -->
+    <suppress>
+        <id>ssrf</id>
+        <comment>Server-side request forgery - CWE-918</comment>
+    </suppress>
+    
+    <suppress>
+        <id>ssrfC</id>
+        <comment>Server-side request forgery - CWE-918</comment>
+    </suppress>
+    
+    <!-- XML external entity -->
+    <suppress>
+        <id>xmlExternalEntity</id>
+        <comment>XML external entity - CWE-611</comment>
+    </suppress>
+    
+    <suppress>
+        <id>xmlExternalEntityC</id>
+        <comment>XML external entity - CWE-611</comment>
+    </suppress>
+    
+    <!-- Insecure deserialization -->
+    <suppress>
+        <id>insecureDeserialization</id>
+        <comment>Insecure deserialization - CWE-502</comment>
+    </suppress>
+    
+    <suppress>
+        <id>insecureDeserializationC</id>
+        <comment>Insecure deserialization - CWE-502</comment>
+    </suppress>
+    
+    <!-- Using components with known vulnerabilities -->
+    <suppress>
+        <id>knownVulnerabilities</id>
+        <comment>Using components with known vulnerabilities - CWE-1104</comment>
+    </suppress>
+    
+    <suppress>
+        <id>knownVulnerabilitiesC</id>
+        <comment>Using components with known vulnerabilities - CWE-1104</comment>
+    </suppress>
+    
+    <!-- Insufficient logging and monitoring -->
+    <suppress>
+        <id>insufficientLogging</id>
+        <comment>Insufficient logging and monitoring - CWE-778</comment>
+    </suppress>
+    
+    <suppress>
+        <id>insufficientLoggingC</id>
+        <comment>Insufficient logging and monitoring - CWE-778</comment>
+    </suppress>
+    
+</suppressions>

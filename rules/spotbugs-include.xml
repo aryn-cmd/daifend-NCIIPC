@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NCIIPC SpotBugs Security Configuration -->
+<!-- Focused on OWASP Top 10 and CWE-Top 25 vulnerabilities -->
+<FindBugsFilter>
+    
+    <!-- Include high-priority security bug patterns -->
+    
+    <!-- SQL Injection Vulnerabilities -->
+    <Match>
+        <Bug pattern="SQL_INJECTION_JPA" />
+        <Bug pattern="SQL_INJECTION_JDO" />
+        <Bug pattern="SQL_INJECTION_HIBERNATE" />
+        <Bug pattern="SQL_INJECTION_JDBC" />
+        <Bug pattern="SQL_INJECTION_SPRING_JDBC" />
+    </Match>
+    
+    <!-- Cross-Site Scripting (XSS) -->
+    <Match>
+        <Bug pattern="XSS_REQUEST_PARAMETER_TO_SEND_ERROR" />
+        <Bug pattern="XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER" />
+        <Bug pattern="XSS_REQUEST_PARAMETER_TO_JSP_WRITER" />
+        <Bug pattern="XSS_REQUEST_PARAMETER_TO_HTTP_HEADER" />
+        <Bug pattern="XSS_REQUEST_PARAMETER_TO_COOKIE" />
+    </Match>
+    
+    <!-- Hardcoded Credentials -->
+    <Match>
+        <Bug pattern="HARD_CODE_PASSWORD" />
+        <Bug pattern="HARD_CODE_PASSWORD_KEYSTORE" />
+        <Bug pattern="HARD_CODE_PASSWORD_USER_PASSWORD" />
+        <Bug pattern="HARD_CODE_PASSWORD_DATABASE" />
+        <Bug pattern="HARD_CODE_PASSWORD_LDAP" />
+    </Match>
+    
+    <!-- Weak Cryptographic Algorithms -->
+    <Match>
+        <Bug pattern="DES_USAGE" />
+        <Bug pattern="MD5_USAGE" />
+        <Bug pattern="SHA1_USAGE" />
+        <Bug pattern="RSA_NO_PADDING" />
+        <Bug pattern="STATIC_IV" />
+        <Bug pattern="ECB_MODE" />
+        <Bug pattern="PADDING_ORACLE" />
+        <Bug pattern="WEAK_MESSAGE_DIGEST" />
+        <Bug pattern="WEAK_MESSAGE_DIGEST_MD5" />
+        <Bug pattern="WEAK_MESSAGE_DIGEST_SHA1" />
+    </Match>
+    
+    <!-- Predictable Random Number Generation -->
+    <Match>
+        <Bug pattern="PREDICTABLE_RANDOM" />
+        <Bug pattern="WEAK_PRNG" />
+        <Bug pattern="SEED_WITH_CURRENT_TIME" />
+    </Match>
+    
+    <!-- Path Traversal -->
+    <Match>
+        <Bug pattern="PATH_TRAVERSAL_IN" />
+        <Bug pattern="PATH_TRAVERSAL_OUT" />
+        <Bug pattern="PATH_TRAVERSAL_FILENAME" />
+        <Bug pattern="PATH_TRAVERSAL_FILENAME_CONCAT" />
+        <Bug pattern="PATH_TRAVERSAL_FILENAME_NORMALIZE" />
+    </Match>
+    
+    <!-- Command Injection -->
+    <Match>
+        <Bug pattern="COMMAND_INJECTION" />
+        <Bug pattern="COMMAND_INJECTION_RUNTIME_EXEC" />
+        <Bug pattern="COMMAND_INJECTION_PROCESS_BUILDER" />
+    </Match>
+    
+    <!-- XML External Entity (XXE) -->
+    <Match>
+        <Bug pattern="XXE_XMLSTREAMREADER" />
+        <Bug pattern="XXE_XMLREADER" />
+        <Bug pattern="XXE_DOCUMENT" />
+        <Bug pattern="XXE_XPATH" />
+        <Bug pattern="XXE_DOCUMENTBUILDER" />
+        <Bug pattern="XXE_SAXPARSER" />
+        <Bug pattern="XXE_XMLINPUTFACTORY" />
+    </Match>
+    
+    <!-- Insecure Deserialization -->
+    <Match>
+        <Bug pattern="OBJECT_DESERIALIZATION" />
+        <Bug pattern="OBJECT_DESERIALIZATION_GADGETS" />
+        <Bug pattern="OBJECT_DESERIALIZATION_JAVA_OBJECT_INPUT_STREAM" />
+    </Match>
+    
+    <!-- Insecure HTTP Connections -->
+    <Match>
+        <Bug pattern="HTTPONLY_COOKIE" />
+        <Bug pattern="SECURE_COOKIE" />
+        <Bug pattern="HTTP_URL_CONNECTION" />
+        <Bug pattern="HTTPS_ONLY_COOKIE" />
+    </Match>
+    
+    <!-- Information Disclosure -->
+    <Match>
+        <Bug pattern="EXCEPTION_LEAKS_INFORMATION" />
+        <Bug pattern="EXCEPTION_LEAKS_INFORMATION_SQL" />
+        <Bug pattern="EXCEPTION_LEAKS_INFORMATION_PATH" />
+        <Bug pattern="EXCEPTION_LEAKS_INFORMATION_FILE" />
+    </Match>
+    
+    <!-- Session Management Issues -->
+    <Match>
+        <Bug pattern="SESSION_FIXATION" />
+        <Bug pattern="SESSION_FIXATION_SERVLET" />
+        <Bug pattern="SESSION_FIXATION_JSESSIONID" />
+    </Match>
+    
+    <!-- Authentication Bypass -->
+    <Match>
+        <Bug pattern="AUTHENTICATION_BYPASS" />
+        <Bug pattern="AUTHENTICATION_BYPASS_SERVLET" />
+        <Bug pattern="AUTHENTICATION_BYPASS_SPRING" />
+    </Match>
+    
+    <!-- Authorization Bypass -->
+    <Match>
+        <Bug pattern="AUTHORIZATION_BYPASS" />
+        <Bug pattern="AUTHORIZATION_BYPASS_SERVLET" />
+        <Bug pattern="AUTHORIZATION_BYPASS_SPRING" />
+    </Match>
+    
+    <!-- CWE-Top 25 Additional Patterns -->
+    
+    <!-- Buffer Overflow (C/C++ specific, but include Java equivalents) -->
+    <Match>
+        <Bug pattern="STRINGBUFFER_STRINGBUILDER_APPEND" />
+        <Bug pattern="STRINGBUFFER_STRINGBUILDER_CONCAT" />
+    </Match>
+    
+    <!-- Null Pointer Dereference -->
+    <Match>
+        <Bug pattern="NP_NULL_ON_SOME_PATH" />
+        <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
+        <Bug pattern="NP_NULL_ON_SOME_PATH_EXCEPTION" />
+        <Bug pattern="NP_NULL_ON_SOME_PATH_MIGHT_BE_INFEASIBLE" />
+        <Bug pattern="NP_NULL_PARAM_DEREF" />
+        <Bug pattern="NP_NULL_PARAM_DEREF_NONVIRTUAL" />
+        <Bug pattern="NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS" />
+    </Match>
+    
+    <!-- Memory Leaks -->
+    <Match>
+        <Bug pattern="GC_UNCHECKED_TYPE_IN_GENERIC_CALL" />
+        <Bug pattern="GC_UNCHECKED_CAST" />
+        <Bug pattern="GC_UNCHECKED_CAST_OF_RETURN_VALUE" />
+    </Match>
+    
+    <!-- Race Conditions -->
+    <Match>
+        <Bug pattern="IS2_INCONSISTENT_SYNC" />
+        <Bug pattern="IS_FIELD_NOT_GUARDED" />
+        <Bug pattern="IS_INCONSISTENT_SYNC" />
+        <Bug pattern="IS_INCONSISTENT_SYNC_ON_FIELD" />
+        <Bug pattern="IS_INCONSISTENT_SYNC_ON_STATIC_FIELD" />
+    </Match>
+    
+    <!-- Resource Leaks -->
+    <Match>
+        <Bug pattern="OS_OPEN_STREAM" />
+        <Bug pattern="OS_OPEN_STREAM_EXCEPTION_PATH" />
+        <Bug pattern="OS_OPEN_STREAM_RESOURCE_LEAK" />
+        <Bug pattern="OS_OPEN_STREAM_RESOURCE_LEAK_EXCEPTION_PATH" />
+    </Match>
+    
+    <!-- Use After Free (Java equivalent) -->
+    <Match>
+        <Bug pattern="UWF_UNWRITTEN_FIELD" />
+        <Bug pattern="UWF_UNWRITTEN_PUBLIC_OR_PROTECTED_FIELD" />
+        <Bug pattern="UWF_UNWRITTEN_FIELD_OF_INTERFACE" />
+    </Match>
+    
+    <!-- Double Free (Java equivalent) -->
+    <Match>
+        <Bug pattern="DF_DOUBLE_FREE" />
+        <Bug pattern="DF_DOUBLE_FREE_EXCEPTION_PATH" />
+    </Match>
+    
+    <!-- Integer Overflow -->
+    <Match>
+        <Bug pattern="INT_OVERFLOW" />
+        <Bug pattern="INT_OVERFLOW_BYTE" />
+        <Bug pattern="INT_OVERFLOW_SHORT" />
+        <Bug pattern="INT_OVERFLOW_INT" />
+        <Bug pattern="INT_OVERFLOW_LONG" />
+    </Match>
+    
+    <!-- Format String -->
+    <Match>
+        <Bug pattern="FS_FORMAT_STRING" />
+        <Bug pattern="FS_FORMAT_STRING_BAD_ARGUMENT" />
+        <Bug pattern="FS_FORMAT_STRING_MALFORMED" />
+        <Bug pattern="FS_FORMAT_STRING_MISSING_ARGUMENT" />
+        <Bug pattern="FS_FORMAT_STRING_MISSING_ARGUMENTS" />
+        <Bug pattern="FS_FORMAT_STRING_MISSING_ARGUMENT_TYPE" />
+        <Bug pattern="FS_FORMAT_STRING_MISSING_ARGUMENT_TYPES" />
+        <Bug pattern="FS_FORMAT_STRING_MISSING_ARGUMENT_TYPES" />
+        <Bug pattern="FS_FORMAT_STRING_MISSING_ARGUMENT_TYPES" />
+    </Match>
+    
+    <!-- Time-of-Check Time-of-Use (TOCTOU) -->
+    <Match>
+        <Bug pattern="TOCTOU_READ_FILE" />
+        <Bug pattern="TOCTOU_WRITE_FILE" />
+        <Bug pattern="TOCTOU_FILE_OPERATION" />
+    </Match>
+    
+    <!-- Uninitialized Variables -->
+    <Match>
+        <Bug pattern="UUF_UNUSED_FIELD" />
+        <Bug pattern="UUF_UNUSED_FIELD_OF_INTERFACE" />
+        <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />
+        <Bug pattern="UUF_UNUSED_FIELD_OF_INTERFACE" />
+    </Match>
+    
+    <!-- Dead Code -->
+    <Match>
+        <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE_OF_NULL" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE_SHADOWS_FIELD" />
+        <Bug pattern="DLS_DEAD_LOCAL_STORE_IN_RETURN" />
+    </Match>
+    
+    <!-- Infinite Loops -->
+    <Match>
+        <Bug pattern="IL_INFINITE_LOOP" />
+        <Bug pattern="IL_INFINITE_RECURSIVE_LOOP" />
+        <Bug pattern="IL_INFINITE_LOOP_FALSE_TERMINATION_CONDITION" />
+    </Match>
+    
+    <!-- Array Index Out of Bounds -->
+    <Match>
+        <Bug pattern="AI_ANNOTATION_ISSUES_USE_BEFORE_DEFINITION" />
+        <Bug pattern="AI_ANNOTATION_ISSUES_USE_BEFORE_DEFINITION_ANNOTATION" />
+    </Match>
+    
+    <!-- Unchecked Return Value -->
+    <Match>
+        <Bug pattern="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" />
+        <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+        <Bug pattern="RV_RETURN_VALUE_IGNORED_INFERRED" />
+        <Bug pattern="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" />
+    </Match>
+    
+    <!-- Improper Input Validation -->
+    <Match>
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_RANGE" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_BOUNDS" />
+    </Match>
+    
+    <!-- Improper Output Encoding -->
+    <Match>
+        <Bug pattern="IMPROPER_OUTPUT_NEUTRALIZATION_FOR_LOGS" />
+        <Bug pattern="IMPROPER_OUTPUT_NEUTRALIZATION_FOR_COMMANDS" />
+    </Match>
+    
+    <!-- Improper Neutralization of Input -->
+    <Match>
+        <Bug pattern="IMPROPER_NEUTRALIZATION_OF_SPECIAL_ELEMENTS" />
+        <Bug pattern="IMPROPER_NEUTRALIZATION_OF_SPECIAL_ELEMENTS_IN_DATA_QUERY_LOGIC" />
+        <Bug pattern="IMPROPER_NEUTRALIZATION_OF_SPECIAL_ELEMENTS_IN_DATA_QUERY_LOGIC_SQL_INJECTION" />
+    </Match>
+    
+    <!-- Improper Restriction of Operations -->
+    <Match>
+        <Bug pattern="IMPROPER_RESTRICTION_OF_OPERATIONS_WITHIN_THE_BOUNDS_OF_A_MEMORY_BUFFER" />
+        <Bug pattern="IMPROPER_RESTRICTION_OF_OPERATIONS_WITHIN_THE_BOUNDS_OF_A_MEMORY_BUFFER_BUFFER_OVERFLOW" />
+        <Bug pattern="IMPROPER_RESTRICTION_OF_OPERATIONS_WITHIN_THE_BOUNDS_OF_A_MEMORY_BUFFER_BUFFER_UNDERFLOW" />
+    </Match>
+    
+    <!-- Improper Access Control -->
+    <Match>
+        <Bug pattern="IMPROPER_ACCESS_CONTROL" />
+        <Bug pattern="IMPROPER_ACCESS_CONTROL_AUTHENTICATION_BYPASS" />
+        <Bug pattern="IMPROPER_ACCESS_CONTROL_AUTHORIZATION_BYPASS" />
+    </Match>
+    
+    <!-- Improper Authentication -->
+    <Match>
+        <Bug pattern="IMPROPER_AUTHENTICATION" />
+        <Bug pattern="IMPROPER_AUTHENTICATION_CREDENTIAL_MANAGEMENT" />
+        <Bug pattern="IMPROPER_AUTHENTICATION_SESSION_MANAGEMENT" />
+    </Match>
+    
+    <!-- Improper Authorization -->
+    <Match>
+        <Bug pattern="IMPROPER_AUTHORIZATION" />
+        <Bug pattern="IMPROPER_AUTHORIZATION_ACCESS_CONTROL" />
+        <Bug pattern="IMPROPER_AUTHORIZATION_PERMISSION_MANAGEMENT" />
+    </Match>
+    
+    <!-- Improper Resource Management -->
+    <Match>
+        <Bug pattern="IMPROPER_RESOURCE_MANAGEMENT" />
+        <Bug pattern="IMPROPER_RESOURCE_MANAGEMENT_RESOURCE_LEAK" />
+        <Bug pattern="IMPROPER_RESOURCE_MANAGEMENT_RESOURCE_EXHAUSTION" />
+    </Match>
+    
+    <!-- Improper Validation of Array Index -->
+    <Match>
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_RANGE" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_BOUNDS" />
+    </Match>
+    
+    <!-- Improper Validation of Array Index -->
+    <Match>
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_RANGE" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_BOUNDS" />
+    </Match>
+    
+    <!-- Improper Validation of Array Index -->
+    <Match>
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_RANGE" />
+        <Bug pattern="IMPROPER_VALIDATION_OF_ARRAY_INDEX_BOUNDS" />
+    </Match>
+    
+</FindBugsFilter>
