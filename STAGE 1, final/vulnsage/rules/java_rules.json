@@ -1,0 +1,66 @@
+[
+    {
+      "id": "__language_cwes__",
+      "language": "java",
+      "cwe_list": [
+        "CWE-89",
+        "CWE-78",
+        "CWE-502",
+        "CWE-611",
+        "CWE-338",
+        "CWE-798",
+        "CWE-20",
+        "CWE-94",
+        "CWE-22",
+        "CWE-190"
+      ],
+      "description": "Common Java application security CWEs (informational)",
+      "patterns": []
+    },
+    {
+      "id": "java-sql-injection",
+      "language": "java",
+      "patterns": [
+          "re:\\bSELECT\\b.*\\+",
+        "re:\\bStatement\\.executeQuery\\s*\\(",
+        "re:\\bexecuteQuery\\s*\\(",
+        "re:\\+\\s*userInput"
+      ],
+      "confidence": 0.85,
+      "cwe": "CWE-89",
+      "severity": "high",
+      "description": "SQL query built via string concatenation may allow injection.",
+      "fix": "Use PreparedStatement with placeholders."
+    },
+    {
+      "id": "java-xxe",
+      "language": "java",
+      "patterns": ["re:DocumentBuilderFactory\\.newInstance\\(\\)", "re:setFeature\\(.*\\)"],
+      "confidence": 0.8,
+      "cwe": "CWE-611",
+      "severity": "high",
+      "description": "XML External Entity injection risk if XXE is not disabled.",
+      "fix": "Set factory features to disallow DOCTYPE and external entities."
+    },
+    {
+      "id": "java-deserialization",
+      "language": "java",
+      "patterns": ["re:ObjectInputStream\\.readObject\\s*\\("],
+      "confidence": 0.9,
+      "cwe": "CWE-502",
+      "severity": "high",
+      "description": "Untrusted deserialization may execute attacker-controlled objects.",
+      "fix": "Use whitelisting deserializers or serialization frameworks like Jackson."
+    },
+    {
+      "id": "java-weak-crypto",
+      "language": "java",
+      "patterns": ["re:MessageDigest\\.getInstance\\(\\\"?MD5\\\"?\\)", "re:\\bDES\\b"],
+      "confidence": 0.8,
+      "cwe": "CWE-327",
+      "severity": "medium",
+      "description": "Weak cryptographic algorithm used.",
+      "fix": "Use SHA-256 or AES-GCM."
+    }
+  ]
+  

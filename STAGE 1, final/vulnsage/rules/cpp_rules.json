@@ -1,0 +1,54 @@
+[
+    {
+      "id": "__language_cwes__",
+      "language": "cpp",
+      "cwe_list": [
+        "CWE-119",
+        "CWE-120",
+        "CWE-125",
+        "CWE-126",
+        "CWE-131",
+        "CWE-170",
+        "CWE-190",
+        "CWE-252",
+        "CWE-362",
+        "CWE-415",
+        "CWE-416",
+        "CWE-476",
+        "CWE-690",
+        "CWE-787",
+        "CWE-20",
+        "CWE-78"
+      ],
+      "description": "Common C/C++ memory-safety and input validation CWEs (informational)",
+      "patterns": []
+    },
+    {
+      "id": "cpp-buffer-overflow",
+      "language": "cpp",
+      "patterns": ["strcpy(", "gets(", "sprintf("],
+      "cwe": "CWE-120",
+      "severity": "high",
+      "description": "Unbounded string copy can cause buffer overflow.",
+      "fix": "Use strncpy, fgets, snprintf with bounds checking."
+    },
+    {
+      "id": "cpp-format-string",
+      "language": "cpp",
+      "patterns": ["printf(", "fprintf(", "sprintf("],
+      "cwe": "CWE-134",
+      "severity": "high",
+      "description": "Passing user input as format string may lead to memory disclosure.",
+      "fix": "Use format specifiers and never pass user input directly."
+    },
+    {
+      "id": "cpp-use-after-free",
+      "language": "cpp",
+      "patterns": ["free(", "delete"],
+      "cwe": "CWE-416",
+      "severity": "high",
+      "description": "Object used after being freed.",
+      "fix": "Set pointer to NULL after free; avoid double free."
+    }
+  ]
+  

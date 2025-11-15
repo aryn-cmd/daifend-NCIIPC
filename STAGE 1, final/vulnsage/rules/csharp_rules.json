@@ -1,0 +1,30 @@
+[
+    {
+      "id": "csharp-sql-injection",
+      "language": "csharp",
+      "patterns": ["SqlCommand(", "+", ")"],
+      "cwe": "CWE-89",
+      "severity": "high",
+      "description": "Concatenating user input into SQL commands leads to injection.",
+      "fix": "Use parameterized queries via SqlParameter."
+    },
+    {
+      "id": "csharp-binary-deserialization",
+      "language": "csharp",
+      "patterns": ["BinaryFormatter.Deserialize("],
+      "cwe": "CWE-502",
+      "severity": "high",
+      "description": "Unsafe deserialization of untrusted data.",
+      "fix": "Avoid BinaryFormatter; use JSON or XML serializers safely."
+    },
+    {
+      "id": "csharp-weak-crypto",
+      "language": "csharp",
+      "patterns": ["MD5CryptoServiceProvider", "SHA1"],
+      "cwe": "CWE-327",
+      "severity": "medium",
+      "description": "Weak cryptographic primitives detected.",
+      "fix": "Use SHA256CryptoServiceProvider or AES."
+    }
+  ]
+  

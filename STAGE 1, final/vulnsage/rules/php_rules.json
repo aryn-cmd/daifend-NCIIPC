@@ -1,0 +1,138 @@
+[
+    {
+      "id": "__language_cwes__",
+      "language": "php",
+      "cwe_list": [
+        "CWE-79",
+        "CWE-89",
+        "CWE-94",
+        "CWE-22",
+        "CWE-98",
+        "CWE-502",
+        "CWE-352",
+        "CWE-918",
+        "CWE-306",
+        "CWE-798",
+        "CWE-20",
+        "CWE-200"
+      ],
+      "description": "Common PHP web-security CWEs (informational)",
+      "patterns": []
+    },
+    {
+      "id": "php-sqli",
+      "language": "php",
+      "patterns": ["mysql_query(", "mysqli_query(", "+", "$_GET"],
+      "cwe": "CWE-89",
+      "severity": "high",
+      "description": "SQL Injection via concatenation of user input.",
+      "fix": "Use prepared statements (PDO) with bound parameters."
+    },
+    {
+      "id": "php-xss",
+      "language": "php",
+      "patterns": ["echo $_GET", "echo $_POST"],
+      "cwe": "CWE-79",
+      "severity": "high",
+      "description": "Unescaped user input in output causes XSS.",
+      "fix": "Escape all output with htmlspecialchars()."
+    },
+    {
+      "id": "php-file-include",
+      "language": "php",
+      "patterns": ["include($_GET", "require($_GET"],
+      "cwe": "CWE-98",
+      "severity": "high",
+      "description": "Dynamic include with user input enables arbitrary file inclusion.",
+      "fix": "Never include user-controlled paths; validate file names."
+    },
+    {
+      "id": "php-deserialization",
+      "language": "php",
+      "patterns": ["unserialize("],
+      "cwe": "CWE-502",
+      "severity": "high",
+      "description": "Untrusted deserialization may lead to RCE.",
+      "fix": "Avoid unserialize(); use JSON decoding."
+    },
+  {
+    "id": "php-xss-echo-unsanitized",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:echo\\s*\\$_(GET|POST|REQUEST|COOKIE)\\s*;",
+    "message": "Possible Cross-Site Scripting (XSS) via unsanitized echo of user input.",
+    "cwe": "CWE-79",
+    "severity": "high",
+    "confidence": 0.9
+  },
+  {
+    "id": "php-sql-injection-mysql",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:mysql_query\\s*\\(.*\\$_(GET|POST|REQUEST)\\s*\\+",
+    "message": "Possible SQL Injection via mysql_query with user-controlled input.",
+    "cwe": "CWE-89",
+    "severity": "high",
+    "confidence": 0.9
+  },
+  {
+    "id": "php-rfi-leader",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:(include|require)(_once)?\\s*\\(.*\\$_(GET|POST|REQUEST)",
+    "message": "Remote/Local File Inclusion via user-controlled include/require.",
+    "cwe": "CWE-98",
+    "severity": "high",
+    "confidence": 0.9
+  },
+  {
+    "id": "php-deserialize-untrusted",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:unserialize\\s*\\(",
+    "message": "Deserialization of untrusted data.",
+    "cwe": "CWE-502",
+    "severity": "high",
+    "confidence": 0.9
+  },
+  {
+    "id": "php-ssrf-requests",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:curl_exec\\s*\\(.*\\$_(GET|POST|REQUEST)",
+    "message": "Possible SSRF via curl_exec on user-controlled URL.",
+    "cwe": "CWE-918",
+    "severity": "medium",
+    "confidence": 0.8
+  },
+  {
+    "id": "php-hardcoded-secret",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:\\$\\w*(password|secret|api[_-]?key)\\s*=\\s*['\"].+['\"]",
+    "message": "Hardcoded secret or API key found in code.",
+    "cwe": "CWE-798",
+    "severity": "medium",
+    "confidence": 0.8
+  },
+  {
+    "id": "php-path-traversal",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:(include|require).*\\\"\\.\\./",
+    "message": "Potential path traversal in include/require statement.",
+    "cwe": "CWE-22",
+    "severity": "medium",
+    "confidence": 0.8
+  },
+  {
+    "id": "php-rce-phpcgi-windows",
+    "language": "php",
+    "multiline": false,
+    "pattern": "re:php-cgi.exe.*\\?\\-",
+    "message": "PHP-CGI mode vulnerability (Windows) — command injection risk.",
+    "cwe": "CWE-94",
+    "severity": "critical",
+    "confidence": 0.95
+  }
+]

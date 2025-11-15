@@ -1,0 +1,74 @@
+[
+    {
+      "id": "__language_cwes__",
+      "language": "python",
+      "cwe_list": [
+        "CWE-20",
+        "CWE-94",
+        "CWE-502",
+        "CWE-22",
+        "CWE-78",
+        "CWE-89",
+        "CWE-327",
+        "CWE-918",
+        "CWE-798",
+        "CWE-200"
+      ],
+      "description": "Common Python application security CWEs (informational)",
+      "patterns": []
+    },
+    {
+      "id": "py-sql-injection",
+      "language": "python",
+      "patterns": [
+        "re:execute\\s*\\([^)]*(\\+|%|format\\(|\\{)\\s*[^)]*\\)",
+        "re:(cursor\\.execute\\s*\\(|\\.execute\\s*\\()).*(\\\\+).*"
+      ],
+      "match_entire_file": false,
+      "confidence": 0.85,
+      "cwe": "CWE-89",
+      "severity": "high",
+      "description": "Dynamic SQL query concatenation may lead to SQL Injection.",
+      "fix": "Use parameterized queries: cursor.execute(query, params)"
+    },
+    {
+      "id": "py-command-exec",
+      "language": "python",
+      "patterns": [
+        "re:\\b(subprocess\\.Popen|subprocess\\.run|subprocess\\.call|os\\.system)\\s*\\(",
+        "re:shell\\s*=\\s*True"
+      ],
+      "confidence": 0.9,
+      "cwe": "CWE-78",
+      "severity": "high",
+      "description": "User-controlled command execution can allow arbitrary code execution.",
+      "fix": "Use subprocess with argument list and shell=False."
+    },
+    {
+      "id": "py-deserialization",
+      "language": "python",
+      "patterns": [
+        "re:\\b(pickle\\.load|pickle\\.loads|yaml\\.load|marshal\\.loads)\\s*\\(",
+        "re:pickle\\.load\\(|pickle\\.loads\\("
+      ],
+      "confidence": 0.9,
+      "cwe": "CWE-502",
+      "severity": "high",
+      "description": "Untrusted deserialization may lead to remote code execution.",
+      "fix": "Use safe_load for YAML; avoid pickle on untrusted input."
+    },
+    {
+      "id": "py-hardcoded-secret",
+      "language": "python",
+      "patterns": [
+        "re:(?:API_KEY|APIKEY|SECRET|PASSWORD|passwd|token)[\\\"'\\s:=]{0,5}[\\\"'][^\\\"']{6,}[\\\"']",
+        "re:[a-zA-Z0-9_]*_password\\s*=\\s*[\\\"'].*[\\\"']"
+      ],
+      "confidence": 0.75,
+      "cwe": "CWE-798",
+      "severity": "medium",
+      "description": "Hardcoded credentials expose sensitive data.",
+      "fix": "Use environment variables or config files with restricted access."
+    }
+  ]
+  

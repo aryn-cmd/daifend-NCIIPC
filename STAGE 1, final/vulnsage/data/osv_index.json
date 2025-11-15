@@ -1,0 +1,19 @@
+{
+    "requests": [
+      {
+        "cve": "CVE-2018-18074",
+        "summary": "Session fixation vulnerability in requests <2.20.0",
+        "versions": ["2.18.4", "2.19.0"],
+        "ecosystem": "pip"
+      }
+    ],
+    "flask": [
+      {
+        "cve": "CVE-2019-1010083",
+        "summary": "Improper input validation in Flask <1.0.3",
+        "versions": ["0.12", "1.0.2"],
+        "ecosystem": "pip"
+      }
+    ]
+  }
+  
